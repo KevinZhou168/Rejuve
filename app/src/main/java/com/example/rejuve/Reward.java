@@ -66,6 +66,7 @@ public class Reward extends AppCompatActivity {
             }
             @Override
             public void onAnimationEnd(Animation animation){
+                FirebaseHelper firebaseHelper = new FirebaseHelper();
                 String pointsEarned = sectors[sectors.length - (degree+2)];
                 Toast.makeText(Reward.this, "Congratulations! You earned " + pointsEarned + " points!", Toast.LENGTH_SHORT).show();
                 // add firebase code

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Rejuve</string>
+    <string-array name="paladinOrGuild">
+        <item>Paladin</item>
+        <item>Guild</item>
+    </string-array>
 </resources>

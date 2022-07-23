@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToSignIn(View v) { setContentView(R.layout.sign_in_choose); }
-    public void goToPaladinSignIn(View v) { setContentView(R.layout.sign_in); isPaladin = true;}
+    public void goToPaladinSignIn(View v) { setContentView(R.layout.sign_in_paladin); isPaladin = true;}
     public void goToGuildSignIn(View v) { setContentView(R.layout.sign_in_guild); isPaladin = false;}
 
     public void goToSignUp(View v) {
