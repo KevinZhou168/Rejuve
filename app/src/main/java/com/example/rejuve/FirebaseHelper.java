@@ -15,6 +15,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -177,12 +178,13 @@ public class FirebaseHelper {
         attachDataToPaladin();
     }
 
-    public void getPaladinsInGuild(String guildCode) {
+    public void getPaladinsInGuild(PaladinsCallback paladinsCallback, String guildCode) {
         Query myData = db.collection("Guilds").document(guildCode).collection("Paladins");
         myData.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<DocumentSnapshot> documents = queryDocumentSnapshots.getDocuments();
+                ArrayList<Paladin> paladinsAL = new ArrayList<>();
                 for(DocumentSnapshot doc: documents) {
                     int points, drinks, streak;
                     String code = doc.getString("code");
@@ -191,8 +193,10 @@ public class FirebaseHelper {
                     drinks = (int)(Math.floor(doc.getDouble("drinks")));
                     streak = (int)(Math.floor(doc.getDouble("streak")));
                     Paladin paladinGot = new Paladin(name, points, drinks, streak, code);
-                    Log.i("PALADIN", paladinGot.toString());
+                    paladinsAL.add(paladinGot);
                 }
+                Collections.sort(paladinsAL);
+                paladinsCallback.onCallback(paladinsAL);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -200,5 +204,9 @@ public class FirebaseHelper {
                 Log.d("PALADIN", "error grabbing paladins in guild");
             }
         });
+    }
+
+    public interface PaladinsCallback {
+        void onCallback(ArrayList<Paladin> paladinsAL);
     }
 }
