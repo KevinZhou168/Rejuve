@@ -10,6 +10,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rejuve">
         <activity
+            android:name=".Timer"
+            android:exported="true" />
+        <activity
+            android:name=".Exercise"
+            android:exported="true" />
+        <activity
+            android:name=".Reward"
+            android:exported="true" />
+        <activity
+            android:name=".Nourishment"
+            android:exported="true" />
+        <activity
+            android:name=".Leaderboard"
+            android:exported="true" />
+        <activity
+            android:name=".JoinCode"
+            android:exported="true" />
+        <activity
+            android:name=".GuildDashboard"
+            android:exported="true" />
+        <activity
+            android:name=".Dashboard"
+            android:exported="true" />
+        <activity
+            android:name=".Challenges"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
