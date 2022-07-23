@@ -1,6 +1,6 @@
 package com.example.rejuve;
 
-public class Paladin {
+public class Paladin implements Comparable<Paladin> {
     private int points, drinks, streak;
     private String guildCode, name;
 
@@ -60,5 +60,11 @@ public class Paladin {
         str += "\nDrinks: " + drinks;
         str += "\nStreak: " + streak;
         return str;
+    }
+
+    @Override
+    public int compareTo(Paladin paladin) {
+        int comparePoints = paladin.getPoints();
+        return comparePoints - this.points;
     }
 }
