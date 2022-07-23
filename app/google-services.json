@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "544231021615",
+    "project_id": "rejuve-e39f2",
+    "storage_bucket": "rejuve-e39f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544231021615:android:68d4815770eebb5ff9bada",
+        "android_client_info": {
+          "package_name": "com.example.rejuve"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544231021615-0cij8kd3a9hava0ce8th3e1e1eik3m5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4DZbzkqD-zBPoYP1zm1IcMxw4zUM-jZc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544231021615-0cij8kd3a9hava0ce8th3e1e1eik3m5j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
