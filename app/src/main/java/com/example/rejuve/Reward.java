@@ -98,7 +98,6 @@ public class Reward extends AppCompatActivity {
     }
 
     public void returnHome(View v){
-        // Change destination to dashboard
         Intent intent = new Intent(this, Dashboard.class);
         startActivity(intent);
     }
