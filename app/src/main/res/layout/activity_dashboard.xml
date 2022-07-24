@@ -63,6 +63,7 @@
         android:layout_width="212dp"
         android:layout_height="48dp"
         android:background="@drawable/roundedbutton"
+        android:onClick="goToExercise"
         android:text="Exercise"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,6 +79,7 @@
         android:layout_height="48dp"
 
         android:backgroundTint="@color/purple_200"
+        android:onClick="signOut"
         android:text="Sign Out"
         android:textColor="#FF5722"
         android:textSize="16sp"
@@ -93,6 +95,7 @@
         android:layout_width="212dp"
         android:layout_height="48dp"
         android:background="@drawable/roundedbutton"
+        android:onClick="goToNourishment"
         android:text="Nourishment"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
