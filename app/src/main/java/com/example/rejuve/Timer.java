@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+//https://learntodroid.com/how-to-create-a-count-down-timer-in-android/
 
 public class Timer extends AppCompatActivity {
     private EditText minutesEditText, secondsEditText;
