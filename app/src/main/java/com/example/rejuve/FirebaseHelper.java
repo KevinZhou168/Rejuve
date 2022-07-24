@@ -51,6 +51,8 @@ public class FirebaseHelper {
         user.put("code", code);
         user.put("name", name);
         user.put("type", "paladin");
+        user.put("streak status", false);
+        user.put("exercise status", false);
 
         db.collection(newUID).document(newUID).set(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -148,6 +150,8 @@ public class FirebaseHelper {
                                 points = (int)(Math.floor(documentSnapshot.getDouble("points")));
                                 drinks = (int)(Math.floor(documentSnapshot.getDouble("drinks")));
                                 streak = (int)(Math.floor(documentSnapshot.getDouble("streak")));
+                                boolean streakIncremented = documentSnapshot.getBoolean("streak status");
+                                boolean exercised = documentSnapshot.getBoolean("exercise status");
                                 Paladin paladinGot = new Paladin(name, points, drinks, streak, code);
                                 firestoreCallback.onCallback(paladinGot);
                             }
@@ -165,7 +169,8 @@ public class FirebaseHelper {
             @Override
             public void onCallback(Paladin paladinGot) {
                 paladin = new Paladin(paladinGot.getName(), paladinGot.getPoints(), paladinGot.getDrinks(), paladinGot.getStreak(), paladinGot.getGuildCode());
-                Log.i("PALADIN", "\nCode: " + paladin.getGuildCode() + "\nPoints: " + paladin.getPoints() + "\nDrinks: " + paladin.getDrinks() + "\nStreak: " + paladin.getStreak());
+                Log.i("PALADIN", "\nCode: " + paladin.getGuildCode() + "\nPoints: " + paladin.getPoints() + "\nDrinks: " + paladin.getDrinks() + "\nStreak: " + paladin.getStreak()
+                + "\nStreak Status: " + paladin.isStreakIncremented() + "\nExercise Status: " + paladin.isExercised());
             }
         });
     }
@@ -175,6 +180,38 @@ public class FirebaseHelper {
         documentReference.update("points", paladin.getPoints() + points);
         documentReference = db.collection("Guilds").document(paladin.getGuildCode()).collection("Paladins").document(uid);
         documentReference.update("points", paladin.getPoints() + points);
+        attachDataToPaladin();
+    }
+
+    public void setDrinks(int drinks) {
+        DocumentReference documentReference = db.collection(uid).document(uid);
+        documentReference.update("drinks", drinks);
+        documentReference = db.collection("Guilds").document(paladin.getGuildCode()).collection("Paladins").document(uid);
+        documentReference.update("drinks", drinks);
+        attachDataToPaladin();
+    }
+
+    public void setStreak(int streak) {
+        DocumentReference documentReference = db.collection(uid).document(uid);
+        documentReference.update("streak", streak);
+        documentReference = db.collection("Guilds").document(paladin.getGuildCode()).collection("Paladins").document(uid);
+        documentReference.update("streak", streak);
+        attachDataToPaladin();
+    }
+
+    public void setStreakIncremented(boolean status) {
+        DocumentReference documentReference = db.collection(uid).document(uid);
+        documentReference.update("streak status", status);
+        documentReference = db.collection("Guilds").document(paladin.getGuildCode()).collection("Paladins").document(uid);
+        documentReference.update("streak status", status);
+        attachDataToPaladin();
+    }
+
+    public void setExercised(boolean status) {
+        DocumentReference documentReference = db.collection(uid).document(uid);
+        documentReference.update("exercise status", status);
+        documentReference = db.collection("Guilds").document(paladin.getGuildCode()).collection("Paladins").document(uid);
+        documentReference.update("exercise status", status);
         attachDataToPaladin();
     }
 

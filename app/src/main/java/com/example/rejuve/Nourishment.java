@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,8 +22,7 @@ public class Nourishment extends AppCompatActivity {
 
     int streak;
     int numCups;
-    final int dailyRequirement = 8;
-    boolean streakContinued = false; // check
+    public static final int dailyRequirement = 8;
     Button rewardButton;
     Button homeButton;
     Button logButton;
@@ -30,6 +30,9 @@ public class Nourishment extends AppCompatActivity {
     TextView dailyTV;
     String streakOutput;
     String dailyOutput;
+
+    public static String STREAK;
+    public static String LOGGED;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,10 @@ public class Nourishment extends AppCompatActivity {
         streakTV = findViewById(R.id.streak);
         dailyTV = findViewById(R.id.cupsLogged);
 
+//        firebaseHelper.getPaladin().setStreak(6); // imported firebaseHelper from MainActivity
+//        firebaseHelper.getPaladin().setDrinks(7);
+        // ^for testing purposes
+
         // define streak from Firebase
         streak = firebaseHelper.getPaladin().getStreak();
         // define numCups from Firebase
@@ -58,17 +65,23 @@ public class Nourishment extends AppCompatActivity {
         dailyOutput = "Daily Progress: " + numCups;
         dailyTV.setText(dailyOutput);
 
-        firebaseHelper.getPaladin().setStreak(6); // imported firebaseHelper from MainActivity
-        firebaseHelper.getPaladin().setDrinks(7);
-        // ^for testing purposes
 
+    }
+
+    public void refresh(View v){
+        streakOutput = "Streak: " + firebaseHelper.getPaladin().getStreak();
+        streakTV.setText(streakOutput);
+        dailyOutput = "Daily Progress: " + firebaseHelper.getPaladin().getDrinks();
+        dailyTV.setText(dailyOutput);
     }
 
     public void log(View v){
         EditText logET = findViewById(R.id.logET);
         String loggedCups = logET.getText().toString();
-        int newDaily = numCups + Integer.parseInt(loggedCups);
+        int newDaily = firebaseHelper.getPaladin().getDrinks() + Integer.parseInt(loggedCups);
         firebaseHelper.getPaladin().setDrinks(newDaily);
+        // firebase method
+        firebaseHelper.setDrinks(newDaily);
         // update display
         dailyOutput = "Daily Progress: " + newDaily;
         dailyTV.setText(dailyOutput);
@@ -76,53 +89,68 @@ public class Nourishment extends AppCompatActivity {
     }
 
     public void checkDaily(int total){
-        if (total >= dailyRequirement){
-            Toast.makeText(Nourishment.this, "Congratulations on meeting your daily goal! Remember to continue to remain hydrated throughout the day!", Toast.LENGTH_SHORT).show();
-            streak++;
-            firebaseHelper.getPaladin().setStreak(streak);
-            streakContinued = true;
+        if (!firebaseHelper.getPaladin().isStreakIncremented() && total >= dailyRequirement){
+            int currentStreak = firebaseHelper.getPaladin().getStreak();
+            currentStreak++;
+            streakOutput = "Streak: " + currentStreak;
+            streakTV.setText(streakOutput);
+            //firebaseHelper.getPaladin().setStreak(currentStreak);
+            // firebase method
+            firebaseHelper.setStreak(currentStreak);
+            //firebaseHelper.getPaladin().setStreakIncremented(true);
+            firebaseHelper.setStreakIncremented(true);
             checkStreak();
+            Toast.makeText(Nourishment.this, "Congratulations on meeting your daily goal!", Toast.LENGTH_SHORT).show();
         }
-        else {
+        else if (total < dailyRequirement){
             Toast.makeText(Nourishment.this, "You're on your way to reaching your daily goal!", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void checkStreak(){
-        if (streak == 7){
+        if (firebaseHelper.getPaladin().getStreak() == 7){
             Toast.makeText(Nourishment.this, "Congratulations on your 7-day streak! Please proceed to claim your reward.", Toast.LENGTH_SHORT).show();
-            streak = 0;
-            firebaseHelper.getPaladin().setStreak(streak);
+            firebaseHelper.getPaladin().setStreak(0);
             homeButton.setVisibility( View.GONE );
             rewardButton.setVisibility(View.VISIBLE);
         }
     }
 
     public void returnHome(View v){
+        //scheduleAlarm();
         Intent intent = new Intent(this, Dashboard.class);
         startActivity(intent);
     }
 
     public void proceedToReward(View v){
+        //scheduleAlarm();
         Intent intent = new Intent(this, Reward.class);
         startActivity(intent);
     }
 
-    // useless function atm
-    public void dailyReset(View v){
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        final Context context = this;
-        PendingIntent pi = PendingIntent.getService(context, 0,
-                new Intent(context, Nourishment.class),PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, pi);
+//    public void scheduleAlarm() {
+//        // Construct an intent that will execute the AlarmReceiver
+//        Intent intent = new Intent(this, AlarmReceiver.class);
+//
+//        //intent.putExtra(STREAK, streakContinued);
+//        intent.putExtra(LOGGED, dailyTV.getText());
+//        // Create a PendingIntent to be triggered when the alarm goes off
+////        final PendingIntent pIntent = PendingIntent.getBroadcast(this,AlarmReceiver.REQUEST_CODE ,
+////                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        PendingIntent pi = PendingIntent.getBroadcast(this, AlarmReceiver.REQUEST_CODE, intent, 0);
+//
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.HOUR_OF_DAY, 14);
+//        calendar.set(Calendar.MINUTE, 48);
+//
+//        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+//                AlarmManager.INTERVAL_DAY, pi);
+//
+//    }
 
-    }
+
 
 }
