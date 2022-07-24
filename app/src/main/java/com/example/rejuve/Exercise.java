@@ -33,10 +33,6 @@ public class Exercise extends AppCompatActivity {
     private boolean nextScreenTimer;
     ArrayList<String> exerciseList;
 
-    TextView testText;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +47,18 @@ public class Exercise extends AppCompatActivity {
         weightsCheck = findViewById(R.id.weightsCB);
         equipmentCheck = findViewById(R.id.equipmentCB);
         otherCheck = findViewById(R.id.otherCB);
+
+        stretch = findViewById(R.id.stretchText);
+        jog = findViewById(R.id.jogText);
+        push = findViewById(R.id.pushText);
+        jump = findViewById(R.id.jumpText);
+        weights = findViewById(R.id.weightsText);
+        equipment = findViewById(R.id.equipmentText);
+        other = findViewById(R.id.otherText);
+
         numChecks = 0;
         isClickable = false;
         nextScreenTimer = false;
-
-        testText = findViewById(R.id.textView17);
 
         stretchCheck.setEnabled(true);
         jogCheck.setEnabled(true);
@@ -74,8 +77,6 @@ public class Exercise extends AppCompatActivity {
             if (stretchCheck.isChecked()) {
                 exerciseList.add(stretch.getText().toString());
                 numChecks++;
-                String testTextTwo = push.getText().toString();
-                testText.setText(testTextTwo);
             }
         }
     }
@@ -146,8 +147,8 @@ public class Exercise extends AppCompatActivity {
             isClickable = true;
         }
         else{
+            isClickable = true;
             Toast.makeText(Exercise.this, "Only 4 exercises can be selected", Toast.LENGTH_LONG).show();
-            isClickable = false;
             stretchCheck.setEnabled(false);
             jogCheck.setEnabled(false);
             pushCheck.setEnabled(false);
@@ -186,7 +187,17 @@ public class Exercise extends AppCompatActivity {
 
     public void goToTimer(View v){
         if(nextScreenTimer){
+            String first = exerciseList.get(0);
+            String second = exerciseList.get(1);
+            String third = exerciseList.get(2);
+            String fourth = exerciseList.get(3);
+
             Intent intent = new Intent(getApplicationContext(), Timer.class);
+
+            intent.putExtra("one",first);
+            intent.putExtra("two",second);
+            intent.putExtra("three",third);
+            intent.putExtra("four",fourth);
             startActivity(intent);
         }
         else{

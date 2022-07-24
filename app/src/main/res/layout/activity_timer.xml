@@ -6,92 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".Timer">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="252dp"
-        android:layout_height="124dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.946"
-        tools:visibility="invisible">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="30"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="MINUTES"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/minutes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:inputType="number"
-                android:maxLength="2"
-                android:selectAllOnFocus="true"
-                android:text="05"
-                android:textSize="48sp" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_weight="5"
-            android:text=":"
-            android:textSize="48sp" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="30"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="SECONDS"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/seconds"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:inputType="number"
-                android:maxLength="2"
-                android:selectAllOnFocus="true"
-                android:text="00"
-                android:textSize="48sp" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-
     <TextView
         android:id="@+id/countDownText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Count down not started"
+        android:text="Exercise"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.129" />
+        app:layout_constraintVertical_bias="0.085" />
 
     <LinearLayout
         android:layout_width="287dp"

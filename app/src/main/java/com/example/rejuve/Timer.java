@@ -11,7 +11,6 @@ import android.widget.TextView;
 //https://learntodroid.com/how-to-create-a-count-down-timer-in-android/
 
 public class Timer extends AppCompatActivity {
-    private EditText minutesEditText, secondsEditText;
     TextView countDownText;
     private Button start, end;
     private CountDownTimer timer;
@@ -19,6 +18,14 @@ public class Timer extends AppCompatActivity {
     int minutesLeft, secondsLeft;
     TextView minutesLeftText, secondsLeftText;
     int totalSecondsLeft;
+
+    int counter;
+    String exercise;
+
+    String first;
+    String second;
+    String third;
+    String fourth;
 
     private void finishTimer(String message) {
         countDownText.setText(message);
@@ -32,7 +39,8 @@ public class Timer extends AppCompatActivity {
         secondsLeft = totalSecondsLeft % 60;
         minutesLeftText.setText(String.format("%02d", minutesLeft));
         secondsLeftText.setText(String.format("%02d", secondsLeft));
-        countDownText.setText("Count down in progress");
+        whichExercise();
+        countDownText.setText(exercise);
     }
 
     private void setupButtons() {
@@ -41,9 +49,10 @@ public class Timer extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                countDownText.setText(exercise);
                 startTime = 0;
-                startTime += Integer.parseInt(secondsEditText.getText().toString()) * 1000;
-                startTime += Integer.parseInt(minutesEditText.getText().toString()) * 60 * 1000;
+                startTime += Integer.parseInt("10") * 1000;
+                startTime += Integer.parseInt("00") * 60 * 1000;
                 start.setEnabled(false);
                 end.setEnabled(true);
                 timer = new CountDownTimer(startTime, 1000) {
@@ -54,7 +63,8 @@ public class Timer extends AppCompatActivity {
 
                     @Override
                     public void onFinish() {
-                        finishTimer("Count down complete");
+                        finishTimer("Start Break");
+                        counter++;
                     }
                 }.start();
             }
@@ -74,12 +84,36 @@ public class Timer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
 
-        minutesEditText = findViewById(R.id.minutes);
-        secondsEditText = findViewById(R.id.seconds);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            first = extras.getString("one");
+            second = extras.getString("two");
+            third = extras.getString("three");
+            fourth = extras.getString("four");
+        }
 
         countDownText = findViewById(R.id.countDownText);
         minutesLeftText = findViewById(R.id.minutesLeftText);
         secondsLeftText = findViewById(R.id.secondsLeftText);
         setupButtons();
+
+        countDownText.setText(first);
+        counter = 0;
+
+    }
+
+    private void whichExercise(){
+        if(counter == 0){
+            exercise = first;
+        }
+        if(counter == 1){
+            exercise = second;
+        }
+        if(counter == 2){
+            exercise = third;
+        }
+        if(counter == 3){
+            exercise = fourth;
+        }
     }
 }
