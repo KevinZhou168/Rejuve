@@ -246,4 +246,20 @@ public class FirebaseHelper {
     public interface PaladinsCallback {
         void onCallback(ArrayList<Paladin> paladinsAL);
     }
+
+    public void setDrinks(int drinks) {
+        DocumentReference documentReference = db.collection(uid).document(uid);
+        documentReference.update("drinks", drinks);
+        documentReference = db.collection("Guilds").document(paladin.getGuildCode()).collection("Paladins").document(uid);
+        documentReference.update("drinks", drinks);
+        attachDataToPaladin();
+    }
+
+    public void setStreak(int streak) {
+        DocumentReference documentReference = db.collection(uid).document(uid);
+        documentReference.update("streak", streak);
+        documentReference = db.collection("Guilds").document(paladin.getGuildCode()).collection("Paladins").document(uid);
+        documentReference.update("streak", streak);
+        attachDataToPaladin();
+    }
 }

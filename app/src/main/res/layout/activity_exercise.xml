@@ -39,7 +39,9 @@
             android:id="@+id/stretchCB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|left" />
+            android:layout_gravity="center_vertical|left"
+            android:enabled="false"
+            android:onClick="ifStretchChecked" />
 
         <TextView
             android:id="@+id/stretchText"
@@ -79,22 +81,13 @@
         app:layout_constraintVertical_bias="0.313">
 
 
-        <ImageView
-            android:id="@+id/imageView15"
-            android:layout_width="wrap_content"
-            android:layout_height="43dp"
-            android:layout_gravity="center_vertical|right"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:rotation="40"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:srcCompat="@drawable/jog" />
-
         <CheckBox
             android:id="@+id/jogCB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|left" />
+            android:layout_gravity="center_vertical|left"
+            android:enabled="false"
+            android:onClick="ifJogChecked" />
 
         <TextView
             android:id="@+id/jogText"
@@ -105,6 +98,17 @@
             android:text="Jog"
             android:textSize="24sp"
             android:textStyle="normal" />
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:rotation="40"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:srcCompat="@drawable/jog" />
 
     </androidx.cardview.widget.CardView>
 
@@ -130,7 +134,9 @@
             android:id="@+id/equipmentCB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|left" />
+            android:layout_gravity="center_vertical|left"
+            android:enabled="false"
+            android:onClick="ifEquipmentChecked" />
 
         <TextView
             android:id="@+id/equipmentText"
@@ -172,7 +178,9 @@
             android:id="@+id/pushCB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|left" />
+            android:layout_gravity="center_vertical|left"
+            android:enabled="false"
+            android:onClick="ifPushChecked" />
 
         <TextView
             android:id="@+id/pushText"
@@ -214,7 +222,9 @@
             android:id="@+id/jumpCB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|left" />
+            android:layout_gravity="center_vertical|left"
+            android:enabled="false"
+            android:onClick="ifJumpChecked" />
 
         <TextView
             android:id="@+id/jumpText"
@@ -256,7 +266,9 @@
             android:id="@+id/otherCB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|left" />
+            android:layout_gravity="center_vertical|left"
+            android:enabled="false"
+            android:onClick="ifOtherChecked" />
 
         <TextView
             android:id="@+id/otherText"
@@ -299,7 +311,9 @@
             android:id="@+id/weightsCB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|left" />
+            android:layout_gravity="center_vertical|left"
+            android:enabled="false"
+            android:onClick="ifWeightsChecked" />
 
         <TextView
             android:id="@+id/weightsText"
@@ -318,5 +332,35 @@
             android:layout_gravity="center_vertical|right"
             app:srcCompat="@drawable/weights" />
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/resetWorkoutBtn"
+        android:layout_width="119dp"
+        android:layout_height="50dp"
+        android:background="@drawable/roundedbutton"
+        android:onClick="reset"
+        android:text="Reset"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView16"
+        app:layout_constraintVertical_bias="0.936" />
+
+    <Button
+        android:id="@+id/submitWorkoutBtn"
+        android:layout_width="119dp"
+        android:layout_height="50dp"
+        android:background="@drawable/roundedbutton"
+        android:onClick="goToTimer"
+        android:text="Next"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView16"
+        app:layout_constraintVertical_bias="0.937" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
