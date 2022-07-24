@@ -11,17 +11,24 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Calendar;
 
 public class Dashboard extends AppCompatActivity {
+    TextView heartTokensTV;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        heartTokensTV = findViewById(R.id.heartTokens);
+        FirebaseHelper firebaseHelper = new FirebaseHelper();
+        String heartTokens = "" + firebaseHelper.getPaladin().getPoints();
+        heartTokensTV.setText(heartTokens);
     }
 
     public void goToLeaderboard(View v) {
@@ -42,6 +49,5 @@ public class Dashboard extends AppCompatActivity {
 
         Intent welcomeIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(welcomeIntent);
-
     }
 }
