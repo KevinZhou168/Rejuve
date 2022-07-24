@@ -3,6 +3,8 @@ package com.example.rejuve;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +19,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
 public class MainActivity extends AppCompatActivity {
+    static final int ALARM_REQ_CODE = 100;
     public static FirebaseHelper firebaseHelper;
     private Spinner signUpSpinner;
     private boolean isPaladin = false;
@@ -83,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent = new Intent(getApplicationContext(), JoinCode.class);
                                     intent.putExtra("userUID", user.getUid());
                                     startActivity(intent);
+                                    setAlarm();
                                 }
                             } else {
                                 Log.i("LOG", "Error signing up", task.getException());
@@ -91,6 +98,19 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    private void setAlarm() {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, 17);
+        c.set(Calendar.MINUTE, 20);
+        c.set(Calendar.SECOND, 0);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), ALARM_REQ_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        // alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), TimeUnit.DAYS.toMillis(1), pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), TimeUnit.MINUTES.toMillis(2), pendingIntent);
     }
 
     public void signIn(View v) {
@@ -115,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                                 if(isPaladin) {
                                     Toast.makeText(getApplicationContext(), "Signed In as Paladin", Toast.LENGTH_SHORT).show();
                                     firebaseHelper.attachDataToPaladin();
+                                    setAlarm();
                                     Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                                     startActivity(intent);
                                 } else {

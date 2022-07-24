@@ -79,7 +79,6 @@ public class Nourishment extends AppCompatActivity {
         EditText logET = findViewById(R.id.logET);
         String loggedCups = logET.getText().toString();
         int newDaily = firebaseHelper.getPaladin().getDrinks() + Integer.parseInt(loggedCups);
-        firebaseHelper.getPaladin().setDrinks(newDaily);
         // firebase method
         firebaseHelper.setDrinks(newDaily);
         // update display

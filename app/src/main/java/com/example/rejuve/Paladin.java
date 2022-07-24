@@ -1,10 +1,10 @@
 package com.example.rejuve;
 
 public class Paladin implements Comparable<Paladin> {
+    private String pUID;
     private int points, drinks, streak;
     private String guildCode, name;
     private boolean streakIncremented, exercised;
-
 
     public Paladin(String name, int points, int drinks, int streak, String guildCode) {
         this.name = name;
@@ -14,6 +14,16 @@ public class Paladin implements Comparable<Paladin> {
         this.guildCode = guildCode;
         this.streakIncremented = false;
         this.exercised = false;
+    }
+
+
+    public Paladin(String pUID, String name, int points, int drinks, int streak, String guildCode) {
+        this.pUID = pUID;
+        this.name = name;
+        this.points = points;
+        this.drinks = drinks;
+        this.streak = streak;
+        this.guildCode = guildCode;
     }
 
     public int getPoints() {
@@ -54,6 +64,14 @@ public class Paladin implements Comparable<Paladin> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getpUID() {
+        return pUID;
+    }
+
+    public void setpUID(String pUID) {
+        this.pUID = pUID;
     }
 
     public String toString() {

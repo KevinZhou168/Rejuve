@@ -183,22 +183,6 @@ public class FirebaseHelper {
         attachDataToPaladin();
     }
 
-    public void setDrinks(int drinks) {
-        DocumentReference documentReference = db.collection(uid).document(uid);
-        documentReference.update("drinks", drinks);
-        documentReference = db.collection("Guilds").document(paladin.getGuildCode()).collection("Paladins").document(uid);
-        documentReference.update("drinks", drinks);
-        attachDataToPaladin();
-    }
-
-    public void setStreak(int streak) {
-        DocumentReference documentReference = db.collection(uid).document(uid);
-        documentReference.update("streak", streak);
-        documentReference = db.collection("Guilds").document(paladin.getGuildCode()).collection("Paladins").document(uid);
-        documentReference.update("streak", streak);
-        attachDataToPaladin();
-    }
-
     public void setStreakIncremented(boolean status) {
         DocumentReference documentReference = db.collection(uid).document(uid);
         documentReference.update("streak status", status);
@@ -229,7 +213,7 @@ public class FirebaseHelper {
                     points = (int)(Math.floor(doc.getDouble("points")));
                     drinks = (int)(Math.floor(doc.getDouble("drinks")));
                     streak = (int)(Math.floor(doc.getDouble("streak")));
-                    Paladin paladinGot = new Paladin(name, points, drinks, streak, code);
+                    Paladin paladinGot = new Paladin(doc.getId(), name, points, drinks, streak, code);
                     paladinsAL.add(paladinGot);
                 }
                 Collections.sort(paladinsAL);
@@ -260,6 +244,38 @@ public class FirebaseHelper {
         documentReference.update("streak", streak);
         documentReference = db.collection("Guilds").document(paladin.getGuildCode()).collection("Paladins").document(uid);
         documentReference.update("streak", streak);
+        attachDataToPaladin();
+    }
+
+    public void getCode(CodeCallback codeCallback) {
+        if(mAuth.getCurrentUser() != null) {
+            uid = mAuth.getUid();
+            db.collection(uid).document(uid).get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(@NonNull DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()) {
+                                String code = documentSnapshot.getString("code");
+                                codeCallback.onCallback(code);
+                            }
+                        }
+                    });
+        }
+    }
+
+    public interface CodeCallback {
+        void onCallback(String code);
+    }
+
+    public void dailyReset(String userUID, String code) {
+        attachDataToPaladin();
+        DocumentReference documentReference = db.collection(userUID).document(userUID);
+        documentReference.update("drinks", 0);
+        documentReference.update("exercise status", false);
+        documentReference = db.collection("Guilds").document(code).collection("Paladins").document(userUID);
+        documentReference.update("drinks", 0);
+        documentReference.update("exercise status", false);
+
         attachDataToPaladin();
     }
 }
