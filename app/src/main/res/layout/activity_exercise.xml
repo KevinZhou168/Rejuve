@@ -81,17 +81,6 @@
         app:layout_constraintVertical_bias="0.313">
 
 
-        <ImageView
-            android:id="@+id/imageView15"
-            android:layout_width="wrap_content"
-            android:layout_height="43dp"
-            android:layout_gravity="center_vertical|right"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:rotation="40"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:srcCompat="@drawable/jog" />
-
         <CheckBox
             android:id="@+id/jogCB"
             android:layout_width="wrap_content"
@@ -109,6 +98,17 @@
             android:text="Jog"
             android:textSize="24sp"
             android:textStyle="normal" />
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:rotation="40"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:srcCompat="@drawable/jog" />
 
     </androidx.cardview.widget.CardView>
 
