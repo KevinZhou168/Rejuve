@@ -63,7 +63,7 @@ public class Timer extends AppCompatActivity {
 
                         countDownText.setText(exercise);
                         startTime = 0;
-                        startTime += Integer.parseInt("10") * 1000;
+                        startTime += Integer.parseInt("02") * 1000;
                         startTime += Integer.parseInt("00") * 60 * 1000;
                         start.setEnabled(false);
                         end.setEnabled(true);
@@ -75,9 +75,17 @@ public class Timer extends AppCompatActivity {
 
                             @Override
                             public void onFinish() {
-                                finishTimer("Break");
-                                timerLinearLayout.setVisibility(View.INVISIBLE);
-                                counter++;
+                                if(counter<3) {
+                                    finishTimer("Break");
+                                    timerLinearLayout.setVisibility(View.INVISIBLE);
+                                    counter++;
+                                }
+                                else{
+                                    countDownText.setText("Finished");
+                                    buttonLinearLayout.setVisibility(View.INVISIBLE);
+                                    timerLinearLayout.setVisibility(View.INVISIBLE);
+                                    spinButton.setVisibility(View.VISIBLE);
+                                }
                             }
                         }.start();
                     }
@@ -140,9 +148,6 @@ public class Timer extends AppCompatActivity {
         }
         if(counter == 4){
             exerciseOrReward = false;
-            buttonLinearLayout.setVisibility(View.INVISIBLE);
-            timerLinearLayout.setVisibility(View.INVISIBLE);
-            spinButton.setVisibility(View.VISIBLE);
         }
     }
 
