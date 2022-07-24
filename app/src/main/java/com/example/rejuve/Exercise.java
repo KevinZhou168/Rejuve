@@ -10,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class Exercise extends AppCompatActivity {
 
     CheckBox stretchCheck;
@@ -29,6 +31,9 @@ public class Exercise extends AppCompatActivity {
     private Integer numChecks;
     private boolean isClickable;
     private boolean nextScreenTimer;
+    ArrayList exerciseList;
+
+    TextView testText;
 
 
 
@@ -36,6 +41,8 @@ public class Exercise extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
+        exerciseList = new ArrayList();
+        exerciseList.removeAll(exerciseList);
 
         stretchCheck = findViewById(R.id.stretchCB);
         jogCheck = findViewById(R.id.jogCB);
@@ -47,6 +54,8 @@ public class Exercise extends AppCompatActivity {
         numChecks = 0;
         isClickable = false;
         nextScreenTimer = false;
+
+        testText = findViewById(R.id.textView17);
 
         stretchCheck.setEnabled(true);
         jogCheck.setEnabled(true);
@@ -63,7 +72,12 @@ public class Exercise extends AppCompatActivity {
         ifChecked();
         if(isClickable) {
             if (stretchCheck.isChecked()) {
+                exerciseList.add(stretch);
                 numChecks++;
+                /**
+                CharSequence testTextTwo = push.getText();
+                testText.setText(testTextTwo);
+                **/
             }
         }
     }
@@ -72,6 +86,7 @@ public class Exercise extends AppCompatActivity {
         ifChecked();
         if(isClickable) {
             if (jogCheck.isChecked()) {
+                exerciseList.add(jog);
                 numChecks++;
             }
         }
@@ -81,6 +96,7 @@ public class Exercise extends AppCompatActivity {
         ifChecked();
         if(isClickable) {
             if (pushCheck.isChecked()) {
+                exerciseList.add(push);
                 numChecks++;
             }
         }
@@ -90,6 +106,7 @@ public class Exercise extends AppCompatActivity {
         ifChecked();
         if(isClickable) {
             if (jumpCheck.isChecked()) {
+                exerciseList.add(jump);
                 numChecks++;
             }
         }
@@ -99,6 +116,7 @@ public class Exercise extends AppCompatActivity {
         ifChecked();
         if(isClickable) {
             if (weightsCheck.isChecked()) {
+                exerciseList.add(weights);
                 numChecks++;
             }
         }
@@ -108,6 +126,7 @@ public class Exercise extends AppCompatActivity {
         ifChecked();
         if(isClickable) {
             if (equipmentCheck.isChecked()) {
+                exerciseList.add(equipment);
                 numChecks++;
             }
         }
@@ -117,9 +136,11 @@ public class Exercise extends AppCompatActivity {
         ifChecked();
         if(isClickable) {
             if (otherCheck.isChecked()) {
+                exerciseList.add(other);
                 numChecks++;
             }
         }
+
     }
 
     public void ifChecked(){
@@ -142,6 +163,8 @@ public class Exercise extends AppCompatActivity {
     }
 
     public void reset(View v){
+        exerciseList.removeAll(exerciseList);
+
         numChecks = 0;
         isClickable = false;
         nextScreenTimer = false;

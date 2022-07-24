@@ -363,4 +363,17 @@
         app:layout_constraintTop_toTopOf="@+id/imageView16"
         app:layout_constraintVertical_bias="0.937" />
 
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="140dp"
+        android:layout_height="36dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.093" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
