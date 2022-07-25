@@ -93,10 +93,8 @@ public class Nourishment extends AppCompatActivity {
             currentStreak++;
             streakOutput = "Streak: " + currentStreak;
             streakTV.setText(streakOutput);
-            //firebaseHelper.getPaladin().setStreak(currentStreak);
             // firebase method
             firebaseHelper.setStreak(currentStreak);
-            //firebaseHelper.getPaladin().setStreakIncremented(true);
             firebaseHelper.setStreakIncremented(true);
             checkStreak();
             Toast.makeText(Nourishment.this, "Congratulations on meeting your daily goal!", Toast.LENGTH_SHORT).show();
@@ -109,7 +107,7 @@ public class Nourishment extends AppCompatActivity {
     public void checkStreak(){
         if (firebaseHelper.getPaladin().getStreak() == 7){
             Toast.makeText(Nourishment.this, "Congratulations on your 7-day streak! Please proceed to claim your reward.", Toast.LENGTH_SHORT).show();
-            firebaseHelper.getPaladin().setStreak(0);
+            firebaseHelper.setStreak(0);
             homeButton.setVisibility( View.GONE );
             rewardButton.setVisibility(View.VISIBLE);
         }
