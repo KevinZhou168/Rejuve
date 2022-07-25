@@ -10,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 public class Exercise extends AppCompatActivity {
@@ -32,6 +34,8 @@ public class Exercise extends AppCompatActivity {
     private boolean isClickable;
     private boolean nextScreenTimer;
     ArrayList<String> exerciseList;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,10 +209,22 @@ public class Exercise extends AppCompatActivity {
         }
     }
 
+    public void goToDashboard(View v) {
+        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+        startActivity(intent);
+    }
 
+    public void goToLeaderboard(View v) {
+        Intent intent = new Intent(getApplicationContext(), Leaderboard.class);
+        startActivity(intent);
+    }
 
+    public void signOut(View v) {
+        mAuth.getInstance().signOut();
 
+        Intent welcomeIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(welcomeIntent);
 
-
+    }
 
 }

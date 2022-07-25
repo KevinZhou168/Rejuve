@@ -30,20 +30,6 @@
         app:srcCompat="@drawable/rejuve_logo3_0" />
 
     <Button
-        android:id="@+id/signUpPageBtn"
-        android:layout_width="165dp"
-        android:layout_height="56dp"
-        android:background="@drawable/roundedbutton"
-        android:onClick="goToSignUp"
-        android:text="Sign Up"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.791" />
-
-    <Button
         android:id="@+id/signInPageBtn"
         android:layout_width="165dp"
         android:layout_height="56dp"
@@ -55,5 +41,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.681" />
+        app:layout_constraintVertical_bias="0.647" />
+
+    <Button
+        android:id="@+id/signUpPageBtn"
+        android:layout_width="165dp"
+        android:layout_height="56dp"
+        android:background="@drawable/roundedbutton"
+        android:onClick="goToSignUp"
+        android:text="Sign Up"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.757" />
 </androidx.constraintlayout.widget.ConstraintLayout>

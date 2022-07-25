@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.Calendar;
 
 public class Nourishment extends AppCompatActivity {
@@ -30,6 +32,8 @@ public class Nourishment extends AppCompatActivity {
     TextView dailyTV;
     String streakOutput;
     String dailyOutput;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +126,24 @@ public class Nourishment extends AppCompatActivity {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY, pi);
+
+    }
+
+    public void goToDashboard(View v) {
+        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+        startActivity(intent);
+    }
+
+    public void goToLeaderboard(View v) {
+        Intent intent = new Intent(getApplicationContext(), Leaderboard.class);
+        startActivity(intent);
+    }
+
+    public void signOut(View v) {
+        mAuth.getInstance().signOut();
+
+        Intent welcomeIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(welcomeIntent);
 
     }
 
