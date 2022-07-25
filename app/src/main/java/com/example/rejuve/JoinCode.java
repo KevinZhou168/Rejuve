@@ -23,7 +23,9 @@ public class JoinCode extends AppCompatActivity {
         Intent intent = getIntent();
         uid = intent.getStringExtra("userUID");
 
-        MainActivity.firebaseHelper.getCodes(new FirebaseHelper.CodesCallback() {
+        FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+        firebaseHelper.getCodes(new FirebaseHelper.CodesCallback() {
             @Override
             public void onCallback(ArrayList<String> codes) {
                 existingCodes = codes;

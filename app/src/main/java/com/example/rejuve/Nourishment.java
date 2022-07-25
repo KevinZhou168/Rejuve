@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,18 +62,14 @@ public class Nourishment extends AppCompatActivity {
         streakTV.setText(streakOutput);
         dailyOutput = "Daily Progress: " + numCups;
         dailyTV.setText(dailyOutput);
-
-        firebaseHelper.getPaladin().setStreak(6); // imported firebaseHelper from MainActivity
-        firebaseHelper.getPaladin().setDrinks(7);
-        // ^for testing purposes
-
     }
 
     public void log(View v){
         EditText logET = findViewById(R.id.logET);
         String loggedCups = logET.getText().toString();
-        int newDaily = numCups + Integer.parseInt(loggedCups);
-        firebaseHelper.getPaladin().setDrinks(newDaily);
+        Log.d("TEST", "In log(): \n" + firebaseHelper.getPaladin());
+        int newDaily = firebaseHelper.getPaladin().getDrinks() + Integer.parseInt(loggedCups);
+        firebaseHelper.setDrinks(newDaily);
         // update display
         dailyOutput = "Daily Progress: " + newDaily;
         dailyTV.setText(dailyOutput);
@@ -80,19 +77,29 @@ public class Nourishment extends AppCompatActivity {
     }
 
     public void checkDaily(int total){
-        if (total >= dailyRequirement){
-            Toast.makeText(Nourishment.this, "Congratulations on meeting your daily goal! Remember to continue to remain hydrated throughout the day!", Toast.LENGTH_SHORT).show();
-            streak++;
-            firebaseHelper.getPaladin().setStreak(streak);
-            streakContinued = true;
-            checkStreak();
+        Log.d("TEST", "In checkDaily(): \n" + firebaseHelper.getPaladin());
+        if (!firebaseHelper.getPaladin().isStreakIncremented() && total >= dailyRequirement){
+            Log.d("TEST", "In if: \n" + firebaseHelper.getPaladin());
+            int currentStreak = firebaseHelper.getPaladin().getStreak();
+            currentStreak++;
+            streakOutput = "Streak: " + currentStreak;
+            streakTV.setText(streakOutput);
+            //firebaseHelper.getPaladin().setStreak(currentStreak);
+            // firebase method
+            firebaseHelper.setStreak(currentStreak);
+            //firebaseHelper.getPaladin().setStreakIncremented(true);
+            firebaseHelper.setStreakIncremented(true);
+            checkStreak(currentStreak);
+            Toast.makeText(Nourishment.this, "Congratulations on meeting your daily goal!", Toast.LENGTH_SHORT).show();
         }
-        else {
+        else if (!firebaseHelper.getPaladin().isStreakIncremented() && total < dailyRequirement){
+            Log.d("TEST", "In else if: \n" + firebaseHelper.getPaladin());
             Toast.makeText(Nourishment.this, "You're on your way to reaching your daily goal!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void checkStreak(){
+    public void checkStreak(int streak){
+        Log.d("TEST", "In checkStreak(): \n" + firebaseHelper.getPaladin());
         if (streak == 7){
             Toast.makeText(Nourishment.this, "Congratulations on your 7-day streak! Please proceed to claim your reward.", Toast.LENGTH_SHORT).show();
             streak = 0;
