@@ -29,9 +29,6 @@ public class Nourishment extends AppCompatActivity {
     String streakOutput;
     String dailyOutput;
 
-    public static String STREAK;
-    public static String LOGGED;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,10 +80,8 @@ public class Nourishment extends AppCompatActivity {
             currentStreak++;
             streakOutput = "Streak: " + currentStreak;
             streakTV.setText(streakOutput);
-            //firebaseHelper.getPaladin().setStreak(currentStreak);
             // firebase method
             firebaseHelper.setStreak(currentStreak);
-            //firebaseHelper.getPaladin().setStreakIncremented(true);
             firebaseHelper.setStreakIncremented(true);
             checkStreak(currentStreak);
             Toast.makeText(Nourishment.this, "Congratulations on meeting your daily goal!", Toast.LENGTH_SHORT).show();
@@ -103,44 +98,18 @@ public class Nourishment extends AppCompatActivity {
             firebaseHelper.setStreak(0);
             homeButton.setVisibility( View.GONE );
             rewardButton.setVisibility(View.VISIBLE);
+            streakOutput = "Streak: 0";
         }
     }
 
     public void returnHome(View v){
-        //scheduleAlarm();
         Intent intent = new Intent(this, Dashboard.class);
         startActivity(intent);
     }
 
     public void proceedToReward(View v){
-        //scheduleAlarm();
         Intent intent = new Intent(this, Reward.class);
         startActivity(intent);
     }
-
-
-//    public void scheduleAlarm() {
-//        // Construct an intent that will execute the AlarmReceiver
-//        Intent intent = new Intent(this, AlarmReceiver.class);
-//
-//        //intent.putExtra(STREAK, streakContinued);
-//        intent.putExtra(LOGGED, dailyTV.getText());
-//        // Create a PendingIntent to be triggered when the alarm goes off
-////        final PendingIntent pIntent = PendingIntent.getBroadcast(this,AlarmReceiver.REQUEST_CODE ,
-////                intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//        PendingIntent pi = PendingIntent.getBroadcast(this, AlarmReceiver.REQUEST_CODE, intent, 0);
-//
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.HOUR_OF_DAY, 14);
-//        calendar.set(Calendar.MINUTE, 48);
-//
-//        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-//                AlarmManager.INTERVAL_DAY, pi);
-//
-//    }
-
-
 
 }
