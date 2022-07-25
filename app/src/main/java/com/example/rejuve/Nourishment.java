@@ -103,6 +103,7 @@ public class Nourishment extends AppCompatActivity {
             firebaseHelper.setStreak(0);
             homeButton.setVisibility( View.GONE );
             rewardButton.setVisibility(View.VISIBLE);
+            streakOutput = "Streak: 0";
         }
     }
 
