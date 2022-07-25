@@ -27,8 +27,13 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         heartTokensTV = findViewById(R.id.heartTokens);
         FirebaseHelper firebaseHelper = new FirebaseHelper();
-        String heartTokens = "" + firebaseHelper.getPaladin().getPoints();
-        heartTokensTV.setText(heartTokens);
+        firebaseHelper.getData(new FirebaseHelper.FirestoreCallback() {
+            @Override
+            public void onCallback(Paladin paladinGot) {
+                String heartTokens = "" + paladinGot.getPoints();
+                heartTokensTV.setText(heartTokens);
+            }
+        });
     }
 
     public void goToLeaderboard(View v) {

@@ -115,8 +115,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void signIn(View v) {
         String email, password;
-        EditText emailET = findViewById(R.id.emailSignInET);
-        EditText passwordET = findViewById(R.id.passSignInET);
+        EditText emailET, passwordET;
+        if(isPaladin) {
+            emailET = findViewById(R.id.emailSignInET);
+            passwordET = findViewById(R.id.passSignInET);
+        } else {
+            emailET = findViewById(R.id.guildEmailSignInET);
+            passwordET = findViewById(R.id.guildPassSignInET);
+        }
         email = emailET.getText().toString();
         password = passwordET.getText().toString();
         if (email.length() == 0 || password.length() == 0) {
