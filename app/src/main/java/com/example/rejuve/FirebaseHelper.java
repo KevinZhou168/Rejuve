@@ -268,12 +268,34 @@ public class FirebaseHelper {
 
     public void dailyReset(String userUID, String code) {
         attachDataToPaladin();
-        DocumentReference documentReference = db.collection(userUID).document(userUID);
+        DocumentReference documentReference1 = db.collection(userUID).document(userUID);
+        documentReference1.update("drinks", 0);
+        documentReference1.update("exercise status", false);
+        documentReference1.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(@NonNull DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    boolean status = documentSnapshot.getBoolean("streak status");
+                    if (!status){
+                        documentReference1.update("streak status", false);
+                    }
+                }
+            }
+        });;
+        DocumentReference documentReference = db.collection("Guilds").document(code).collection("Paladins").document(userUID);
         documentReference.update("drinks", 0);
         documentReference.update("exercise status", false);
-        documentReference = db.collection("Guilds").document(code).collection("Paladins").document(userUID);
-        documentReference.update("drinks", 0);
-        documentReference.update("exercise status", false);
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(@NonNull DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    boolean status = documentSnapshot.getBoolean("streak status");
+                    if (!status){
+                        documentReference.update("streak status", false);
+                    }
+                }
+            }
+        });;
 
         attachDataToPaladin();
     }
