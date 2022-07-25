@@ -1,10 +1,24 @@
 package com.example.rejuve;
 
 public class Paladin implements Comparable<Paladin> {
+    private String pUID;
     private int points, drinks, streak;
     private String guildCode, name;
+    private boolean streakIncremented, exercised;
 
     public Paladin(String name, int points, int drinks, int streak, String guildCode) {
+        this.name = name;
+        this.points = points;
+        this.drinks = drinks;
+        this.streak = streak;
+        this.guildCode = guildCode;
+        this.streakIncremented = false;
+        this.exercised = false;
+    }
+
+
+    public Paladin(String pUID, String name, int points, int drinks, int streak, String guildCode) {
+        this.pUID = pUID;
         this.name = name;
         this.points = points;
         this.drinks = drinks;
@@ -52,6 +66,14 @@ public class Paladin implements Comparable<Paladin> {
         this.name = name;
     }
 
+    public String getpUID() {
+        return pUID;
+    }
+
+    public void setpUID(String pUID) {
+        this.pUID = pUID;
+    }
+
     public String toString() {
         String str = "\n\n";
         str += "Name: " + name;
@@ -59,6 +81,8 @@ public class Paladin implements Comparable<Paladin> {
         str += "\nPoints: " + points;
         str += "\nDrinks: " + drinks;
         str += "\nStreak: " + streak;
+        str += "\nStreak Status: " + streakIncremented;
+        str += "\nExercise Status: " + exercised;
         return str;
     }
 
@@ -66,5 +90,21 @@ public class Paladin implements Comparable<Paladin> {
     public int compareTo(Paladin paladin) {
         int comparePoints = paladin.getPoints();
         return comparePoints - this.points;
+    }
+
+    public boolean isStreakIncremented() {
+        return streakIncremented;
+    }
+
+    public void setStreakIncremented(boolean streakIncremented) {
+        this.streakIncremented = streakIncremented;
+    }
+
+    public boolean isExercised() {
+        return exercised;
+    }
+
+    public void setExercised(boolean exercised) {
+        this.exercised = exercised;
     }
 }

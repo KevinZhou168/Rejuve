@@ -31,7 +31,7 @@
         app:srcCompat="@drawable/logo_no_text" />
 
     <TextView
-        android:id="@+id/textviewNum"
+        android:id="@+id/guildCodeTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
@@ -65,6 +65,7 @@
         android:layout_height="48dp"
 
         android:backgroundTint="@color/purple_200"
+        android:onClick="signOut"
         android:text="Sign Out"
         android:textColor="#FF5722"
         android:textSize="16sp"
