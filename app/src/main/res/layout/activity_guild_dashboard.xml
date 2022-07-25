@@ -60,27 +60,11 @@
         app:layout_constraintVertical_bias="0.265" />
 
     <Button
-        android:id="@+id/signOutBtnGuild"
-        android:layout_width="121dp"
-        android:layout_height="48dp"
-
-        android:backgroundTint="@color/purple_200"
-        android:onClick="signOut"
-        android:text="Sign Out"
-        android:textColor="#FF5722"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.941"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
-
-    <Button
         android:id="@+id/addQuestBtn"
         android:layout_width="212dp"
         android:layout_height="48dp"
         android:background="@drawable/roundedbutton"
+        android:onClick="goToQuests"
         android:text="Add Quest"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -100,19 +84,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/bottombarbg" />
-
-    <ImageButton
-        android:id="@+id/guildPlusBtn"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:onClick="goToQuests"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.134"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.969"
-        app:srcCompat="@drawable/plus" />
 
     <ImageButton
         android:id="@+id/guildHomeBtn"
@@ -138,4 +109,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.975"
         app:srcCompat="@drawable/leaderboard2" />
+
+    <ImageButton
+        android:id="@+id/searchBtn5"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:onClick="signOut"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.131"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.969"
+        app:srcCompat="@drawable/logout2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
