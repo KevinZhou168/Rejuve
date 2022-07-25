@@ -51,7 +51,8 @@ public class Reward extends AppCompatActivity {
             }
         });
     }
-
+    // The functions spin() and getDegreesForSectors() below was taken from Learnoset-Learn Coding Online
+    // Link: https://www.youtube.com/watch?v=5O2Uox-TR00
     private void spin(){
         degree = random.nextInt(sectors.length-1);
         RotateAnimation rotateAnimation = new RotateAnimation(0, (360*sectors.length)+sectorDegrees[degree],
@@ -73,7 +74,7 @@ public class Reward extends AppCompatActivity {
                 int numPts = Integer.parseInt(pointsEarned);
                 firebaseHelper.addPoints(numPts);
                 spinButton.setVisibility( View.GONE );
-                spinButton.setClickable(false); //apparently useless
+                spinButton.setClickable(false); 
                 returnButton.setVisibility( View.VISIBLE );
                 isSpinning = false;
             }
