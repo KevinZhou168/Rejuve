@@ -25,6 +25,7 @@ public class Timer extends AppCompatActivity {
     int counter;
     String exercise;
     boolean exerciseOrReward = true;
+    boolean dailyReset;
 
     LinearLayout timerLinearLayout;
     LinearLayout buttonLinearLayout;
@@ -34,6 +35,8 @@ public class Timer extends AppCompatActivity {
     String second;
     String third;
     String fourth;
+
+
 
     private void finishTimer(String message) {
         countDownText.setText(message);
@@ -115,6 +118,9 @@ public class Timer extends AppCompatActivity {
             fourth = extras.getString("four");
         }
 
+        FirebaseHelper firebaseHelper= new FirebaseHelper();
+        dailyReset = firebaseHelper.getPaladin().isExercised();
+
         countDownText = findViewById(R.id.countDownText);
         minutesLeftText = findViewById(R.id.minutesLeftText);
         secondsLeftText = findViewById(R.id.secondsLeftText);
@@ -152,8 +158,11 @@ public class Timer extends AppCompatActivity {
     }
 
     public void goToReward(View v){
-
-            Intent intent = new Intent(getApplicationContext(), Reward.class);
-            startActivity(intent);
+            if(dailyReset) {
+                Intent intent = new Intent(getApplicationContext(), Reward.class);
+                startActivity(intent);
+            }
     }
+
+
 }
