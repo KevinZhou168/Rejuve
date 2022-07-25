@@ -20,9 +20,6 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class Nourishment extends AppCompatActivity {
-
-    int streak;
-    int numCups;
     public static final int dailyRequirement = 8;
     Button rewardButton;
     Button homeButton;
@@ -51,15 +48,10 @@ public class Nourishment extends AppCompatActivity {
         streakTV = findViewById(R.id.streak);
         dailyTV = findViewById(R.id.cupsLogged);
 
-        // define streak from Firebase
-        streak = firebaseHelper.getPaladin().getStreak();
-        // define numCups from Firebase
-        numCups = firebaseHelper.getPaladin().getDrinks();
-
         // display
-        streakOutput = "Streak: " + streak;
+        streakOutput = "Streak: " + firebaseHelper.getPaladin().getStreak();
         streakTV.setText(streakOutput);
-        dailyOutput = "Daily Progress: " + numCups;
+        dailyOutput = "Daily Progress: " + firebaseHelper.getPaladin().getDrinks();
         dailyTV.setText(dailyOutput);
     }
 
@@ -87,21 +79,20 @@ public class Nourishment extends AppCompatActivity {
         Log.d("TEST", "In checkDaily(): \n" + firebaseHelper.getPaladin());
         if (!firebaseHelper.getPaladin().isStreakIncremented() && total >= dailyRequirement) {
             Log.d("TEST", "In if: \n" + firebaseHelper.getPaladin());
-            if (!firebaseHelper.getPaladin().isStreakIncremented() && total >= dailyRequirement) {
-                int currentStreak = firebaseHelper.getPaladin().getStreak();
-                currentStreak++;
-                streakOutput = "Streak: " + currentStreak;
-                streakTV.setText(streakOutput);
-                //firebaseHelper.getPaladin().setStreak(currentStreak);
-                // firebase method
-                firebaseHelper.setStreak(currentStreak);
-                //firebaseHelper.getPaladin().setStreakIncremented(true);
-                firebaseHelper.setStreakIncremented(true);
-                checkStreak(currentStreak);
-                Toast.makeText(Nourishment.this, "Congratulations on meeting your daily goal!", Toast.LENGTH_SHORT).show();
-            } else if (total < dailyRequirement) {
-                Toast.makeText(Nourishment.this, "You're on your way to reaching your daily goal!", Toast.LENGTH_SHORT).show();
-            }
+            int currentStreak = firebaseHelper.getPaladin().getStreak();
+            currentStreak++;
+            streakOutput = "Streak: " + currentStreak;
+            streakTV.setText(streakOutput);
+            //firebaseHelper.getPaladin().setStreak(currentStreak);
+            // firebase method
+            firebaseHelper.setStreak(currentStreak);
+            //firebaseHelper.getPaladin().setStreakIncremented(true);
+            firebaseHelper.setStreakIncremented(true);
+            checkStreak(currentStreak);
+            Toast.makeText(Nourishment.this, "Congratulations on meeting your daily goal!", Toast.LENGTH_SHORT).show();
+
+        } else if (total < dailyRequirement) {
+            Toast.makeText(Nourishment.this, "You're on your way to reaching your daily goal!", Toast.LENGTH_SHORT).show();
         }
     }
 
