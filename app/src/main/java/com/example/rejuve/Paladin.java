@@ -16,6 +16,15 @@ public class Paladin implements Comparable<Paladin> {
         this.exercised = false;
     }
 
+    public Paladin(String name, int points, int drinks, int streak, String guildCode, boolean streakIncremented, boolean exercised) {
+        this.name = name;
+        this.points = points;
+        this.drinks = drinks;
+        this.streak = streak;
+        this.guildCode = guildCode;
+        this.streakIncremented = streakIncremented;
+        this.exercised = exercised;
+    }
 
     public Paladin(String pUID, String name, int points, int drinks, int streak, String guildCode) {
         this.pUID = pUID;
@@ -77,7 +86,7 @@ public class Paladin implements Comparable<Paladin> {
     public String toString() {
         String str = "\n\n";
         str += "Name: " + name;
-        str += "Guild Code: " + guildCode;
+        str += "\nGuild Code: " + guildCode;
         str += "\nPoints: " + points;
         str += "\nDrinks: " + drinks;
         str += "\nStreak: " + streak;

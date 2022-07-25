@@ -102,21 +102,27 @@ public class MainActivity extends AppCompatActivity {
 
     private void setAlarm() {
         Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR_OF_DAY, 17);
-        c.set(Calendar.MINUTE, 20);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
         c.set(Calendar.SECOND, 0);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), ALARM_REQ_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        // alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), TimeUnit.DAYS.toMillis(1), pendingIntent);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), TimeUnit.MINUTES.toMillis(2), pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), TimeUnit.DAYS.toMillis(1), pendingIntent);
+        // alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), TimeUnit.MINUTES.toMillis(2), pendingIntent);
     }
 
     public void signIn(View v) {
         String email, password;
-        EditText emailET = findViewById(R.id.emailSignInET);
-        EditText passwordET = findViewById(R.id.passSignInET);
+        EditText emailET, passwordET;
+        if(isPaladin) {
+            emailET = findViewById(R.id.emailSignInET);
+            passwordET = findViewById(R.id.passSignInET);
+        } else {
+            emailET = findViewById(R.id.guildEmailSignInET);
+            passwordET = findViewById(R.id.guildPassSignInET);
+        }
         email = emailET.getText().toString();
         password = passwordET.getText().toString();
         if (email.length() == 0 || password.length() == 0) {

@@ -31,7 +31,7 @@
         app:srcCompat="@drawable/logo_no_text" />
 
     <TextView
-        android:id="@+id/textviewNum"
+        android:id="@+id/guildCodeTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
@@ -65,6 +65,7 @@
         android:layout_height="48dp"
 
         android:backgroundTint="@color/purple_200"
+        android:onClick="signOut"
         android:text="Sign Out"
         android:textColor="#FF5722"
         android:textSize="16sp"
@@ -104,9 +105,10 @@
         android:id="@+id/guildPlusBtn"
         android:layout_width="52dp"
         android:layout_height="52dp"
+        android:onClick="goToQuests"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintHorizontal_bias="0.134"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.969"
@@ -128,6 +130,7 @@
         android:id="@+id/guildLeaderboardBtn"
         android:layout_width="60dp"
         android:layout_height="56dp"
+        android:onClick="goToLeaderboard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.852"

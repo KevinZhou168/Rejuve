@@ -152,7 +152,7 @@ public class FirebaseHelper {
                                 streak = (int)(Math.floor(documentSnapshot.getDouble("streak")));
                                 boolean streakIncremented = documentSnapshot.getBoolean("streak status");
                                 boolean exercised = documentSnapshot.getBoolean("exercise status");
-                                Paladin paladinGot = new Paladin(name, points, drinks, streak, code);
+                                Paladin paladinGot = new Paladin(name, points, drinks, streak, code, streakIncremented, exercised);
                                 firestoreCallback.onCallback(paladinGot);
                             }
                         }
@@ -168,9 +168,8 @@ public class FirebaseHelper {
         getData(new FirestoreCallback() {
             @Override
             public void onCallback(Paladin paladinGot) {
-                paladin = new Paladin(paladinGot.getName(), paladinGot.getPoints(), paladinGot.getDrinks(), paladinGot.getStreak(), paladinGot.getGuildCode());
-                Log.i("PALADIN", "\nCode: " + paladin.getGuildCode() + "\nPoints: " + paladin.getPoints() + "\nDrinks: " + paladin.getDrinks() + "\nStreak: " + paladin.getStreak()
-                + "\nStreak Status: " + paladin.isStreakIncremented() + "\nExercise Status: " + paladin.isExercised());
+                paladin = new Paladin(paladinGot.getName(), paladinGot.getPoints(), paladinGot.getDrinks(), paladinGot.getStreak(), paladinGot.getGuildCode(), paladinGot.isStreakIncremented(), paladinGot.isExercised());
+                Log.i("CHECK DAILY", "Inside attachDataToPaladin() " + paladin.toString());
             }
         });
     }
