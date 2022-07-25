@@ -33,6 +33,8 @@ public class Nourishment extends AppCompatActivity {
     String streakOutput;
     String dailyOutput;
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,5 +129,22 @@ public class Nourishment extends AppCompatActivity {
 
     }
 
+    public void goToDashboard(View v) {
+        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+        startActivity(intent);
+    }
+
+    public void goToLeaderboard(View v) {
+        Intent intent = new Intent(getApplicationContext(), Leaderboard.class);
+        startActivity(intent);
+    }
+
+    public void signOut(View v) {
+        mAuth.getInstance().signOut();
+
+        Intent welcomeIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(welcomeIntent);
+
+    }
 
 }
