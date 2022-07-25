@@ -11,7 +11,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-//https://learntodroid.com/how-to-create-a-count-down-timer-in-android/
+
+
+/**
+ * Link: https://learntodroid.com/how-to-create-a-count-down-timer-in-android/
+ * Functions Used: finishTimer(), updateTimeRemaining(), setUpButtons()
+ * Author: Jarrod Lilkendey
+ */
 
 public class Timer extends AppCompatActivity {
     TextView countDownText;
@@ -66,8 +72,8 @@ public class Timer extends AppCompatActivity {
 
                         countDownText.setText(exercise);
                         startTime = 0;
-                        startTime += Integer.parseInt("02") * 1000;
-                        startTime += Integer.parseInt("00") * 60 * 1000;
+                        startTime += Integer.parseInt("00") * 1000;
+                        startTime += Integer.parseInt("05") * 60 * 1000;
                         start.setEnabled(false);
                         end.setEnabled(true);
                         timer = new CountDownTimer(startTime, 1000) {
